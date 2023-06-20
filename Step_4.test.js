@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Controls from '../components/Controls';
 import { checkWin, printMessage } from '../utils/checkWin';
 import App from '../App';
 import * as shuffleDeckModule from '../utils/shuffleDeck';
@@ -111,18 +110,15 @@ describe('App component', () => {
       { suit: 'hearts', value: '5' },
       { suit: 'clubs', value: '5' },
       { suit: 'spades', value: '5' },
-      // Losing scenario
     ]);
   });
 
   it('allows the user to hit and draws a card', () => {
     setup();
 
-    // Click the "Hit" button
     const hitButton = screen.getByText(/HIT/i);
     fireEvent.click(hitButton);
 
-    // Assert that a card is drawn
     const playerHand = screen.getByTestId('player-hand');
     const cardElements = screen.getAllByTestId('card');
     expect(cardElements).toHaveLength(5);
@@ -132,11 +128,9 @@ describe('App component', () => {
   it('allows the user to stand and triggers the dealer turn', () => {
     setup();
 
-    // Click the "Stand" button
     const standButton = screen.getByText(/STAND/i);
     fireEvent.click(standButton);
 
-    // Assert that the dealer turn has started
     const hitButton = screen.queryByText(/HIT/i);
     expect(hitButton).toBeNull();
     expect(standButton).not.toBeInTheDocument();
@@ -189,65 +183,4 @@ describe('App component', () => {
     const loseMessage = screen.getByText(/Dealer Wins!/i);
     expect(loseMessage).toBeInTheDocument();
   });
-
-  // it('checks win conditions and displays the correct message', () => {
-  //   render(<App />);
-  //   const betButton = screen.getByText(/Place Bet/i);
-  //   userEvent.click(betButton);
-
-  //   // Assert that the game has started
-  //   const gameStatusMessage = screen.getByText(/Place your bet to begin/i);
-  //   expect(gameStatusMessage).toBeInTheDocument();
-
-  //   // Simulate game actions (hit/stand) to reach win conditions
-
-  //   // Example: User wins
-  //   const userHand = screen.getByTestId('hand-user');
-  //   const dealerHand = screen.getByTestId('hand-dealer');
-
-  //   // Manually set user and dealer cards
-  //   userHand.innerHTML = '<div class="card">A</div><div class="card">2</div>';
-  //   dealerHand.innerHTML = '<div class="card">K</div><div class="card">2</div>';
-
-  //   // Click the "Stand" button
-  //   const standButton = screen.getByText(/STAND/i);
-  //   userEvent.click(standButton);
-
-  //   // Assert the win message
-  //   const winMessage = screen.getByText(/You Win!/i);
-  //   expect(winMessage).toBeInTheDocument();
-
-  //   // Example: Dealer wins
-  //   // Reset the game
-  //   userEvent.click(betButton);
-
-  //   // Manually set user and dealer cards
-  //   userHand.innerHTML = '<div class="card">A</div><div class="card">2</div>';
-  //   dealerHand.innerHTML = '<div class="card">K</div><div class="card">Q</div>';
-
-  //   // Click the "Stand" button
-  //   userEvent.click(standButton);
-
-  //   // Assert the lose message
-  //   const loseMessage = screen.getByText(/Dealer Wins!/i);
-  //   expect(loseMessage).toBeInTheDocument();
-
-  //   // Example: Draw
-  //   // Reset the game
-  //   userEvent.click(betButton);
-
-  //   // Manually set user and dealer cards
-  //   userHand.innerHTML = '<div class="card">A</div><div class="card">2</div>';
-  //   dealerHand.innerHTML = '<div class="card">A</div><div class="card">2</div>';
-
-  //   // Click the "Stand" button
-  //   userEvent.click(standButton);
-
-  //   // Assert the draw message
-  //   const drawMessage = screen.getByText(/Push! It's a Tie!/i);
-  //   expect(drawMessage).toBeInTheDocument();
-  // });
-
-  // Add more test cases for other game scenarios
-
 });
