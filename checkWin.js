@@ -1,5 +1,5 @@
 // Implement the checkWin function
-export function checkWin (userScore, userCardCount, dealerScore, dealerCardCount, events) {
+export function checkWin (playerScore, playerCardCount, dealerScore, dealerCardCount, events) {
 
 }
 // Implement the printMessage function
