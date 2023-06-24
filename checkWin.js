@@ -3,6 +3,6 @@ export function checkWin (playerScore, playerCardCount, dealerScore, dealerCardC
 
 }
 // Implement the printMessage function
-export function printMessage (result, messages) {
+export function printMessage (event, messages) {
 
 }
